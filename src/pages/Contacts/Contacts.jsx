@@ -2,8 +2,7 @@ import Form from 'components/Form';
 import ContactsList from 'components/ContactsList';
 import Filter from 'components/Filter';
 import toast from 'react-hot-toast';
-import { useDispatch, useSelector } from 'react-redux';
-import { filterUpdate } from 'Redux/filter/filterSlice';
+import { useSelector } from 'react-redux';
 import {
   useAddContactsMutation,
   useGetContactsQuery,
@@ -14,7 +13,6 @@ import { DefToaster } from 'components/Toaster';
 import { Box } from '@mui/material';
 
 export default function Contacts() {
-  const dispatch = useDispatch();
   const {
     data: contacts,
     error,
@@ -30,6 +28,7 @@ export default function Contacts() {
   // console.log('contacts', contacts);
 
   const filter = useSelector(selectFilter);
+  console.log('filter', filter);
 
   const handleFormSubmit = async contactInfo => {
     const isDuplicated = contacts.some(
@@ -49,10 +48,6 @@ export default function Contacts() {
       toast.error("Wasn't able to create contact");
     }
   };
-
-  // const visableContacts = useMemo(() => { return contacts.filter(contact =>
-  //   contact.name.toLowerCase().includes(filter.toLowerCase()))
-  // }, [contacts, filter]);
 
   const visiableContacts = () => {
     if (!contacts) {
@@ -84,10 +79,7 @@ export default function Contacts() {
       <h1>Add Contact</h1>
       <Form onFormSubmit={handleFormSubmit}></Form>
       <h2>Contacts</h2>
-      <Filter
-        value={filter}
-        onChange={evt => dispatch(filterUpdate(evt.currentTarget.value))}
-      ></Filter>
+      <Filter />
       {isLoading && !error && (
         <b>
           <br></br>Loading contacts...

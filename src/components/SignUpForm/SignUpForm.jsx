@@ -60,8 +60,8 @@ const SignUpForm = () => {
           handleSignUpSubmit(data);
         })}
       >
-        <Grid container spacing={2}>
-          <Grid item xs={12} sm={6}>
+        <Grid container spacing={2} justifyContent="space-between">
+          <Grid item sx={{ width: '50%' }}>
             <Input
               name="firstName"
               label="First Name"
@@ -70,7 +70,7 @@ const SignUpForm = () => {
               autoFocus
             ></Input>
           </Grid>
-          <Grid item xs={12} sm={6}>
+          <Grid item sx={{ width: '50%' }}>
             <Input
               name="lastName"
               label="Last Name"
