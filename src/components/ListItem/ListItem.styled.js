@@ -5,7 +5,7 @@ export const ListEl = styled.li`
   align-items: center;
   gap: 10px;
   justify-content: space-between;
-  max-width: 350px;
+  max-width: 500px;
 
   padding: 10px;
   border: 1px solid gray;
@@ -23,6 +23,11 @@ export const ListEl = styled.li`
 
   button {
     :hover {
+      path {
+        color: green;
+      }
+    }
+    :hover:last-child {
       path {
         color: red;
       }

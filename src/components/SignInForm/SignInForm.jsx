@@ -1,6 +1,4 @@
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { useLoginUserMutation } from 'Redux/auth/authApi';
 import { setCredentials } from 'Redux/auth/authSlice';
 import { useDispatch } from 'react-redux';
@@ -9,20 +7,8 @@ import { DefToaster } from 'components/Toaster';
 import { Box, Button } from '@mui/material';
 import Input from 'components/Input';
 
-let shema = yup.object().shape({
-  email: yup.string().required(),
-  password: yup.string(),
-});
-
 const SignInForm = () => {
-  const {
-    register,
-    handleSubmit,
-    reset,
-    // formState: { errors },
-  } = useForm({
-    resolver: yupResolver(shema),
-  });
+  const { register, handleSubmit, reset } = useForm({});
 
   const dispatch = useDispatch();
   const [loginUser] = useLoginUserMutation();

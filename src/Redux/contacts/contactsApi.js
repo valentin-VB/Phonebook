@@ -22,6 +22,19 @@ export const contactsApi = createApi({
       invalidatesTags: ['Contacts'],
     }),
 
+    editContact: build.mutation({
+      query({ id, contact }) {
+        console.log('contact', contact);
+        console.log('id', id);
+        return {
+          url: `/contacts/${id}`,
+          method: 'PATCH',
+          body: contact,
+        };
+      },
+      invalidatesTags: ['Contacts'],
+    }),
+
     deleteContact: build.mutation({
       query(id) {
         return {
@@ -37,5 +50,6 @@ export const contactsApi = createApi({
 export const {
   useGetContactsQuery,
   useAddContactsMutation,
+  useEditContactMutation,
   useDeleteContactMutation,
 } = contactsApi;

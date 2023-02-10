@@ -1,5 +1,4 @@
 import { useForm } from 'react-hook-form';
-import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useRegisterUserMutation } from 'Redux/auth/authApi';
 import { useDispatch } from 'react-redux';
@@ -8,11 +7,8 @@ import toast from 'react-hot-toast';
 import { DefToaster } from 'components/Toaster';
 import { Box, Button, Grid } from '@mui/material';
 import Input from 'components/Input';
-
-let shema = yup.object().shape({
-  email: yup.string().required(),
-  password: yup.string(),
-});
+import { ErrorText } from 'components/ContactsForm/ContactsForm.styled';
+import { signUpScheme } from 'validationShemes';
 
 const SignUpForm = () => {
   const [registerUser] = useRegisterUserMutation();
@@ -20,9 +16,9 @@ const SignUpForm = () => {
     register,
     handleSubmit,
     reset,
-    // formState: { errors },
+    formState: { errors },
   } = useForm({
-    resolver: yupResolver(shema),
+    resolver: yupResolver(signUpScheme),
   });
   const dispatch = useDispatch();
 
@@ -69,6 +65,7 @@ const SignUpForm = () => {
               autoComplete="given-name"
               autoFocus
             ></Input>
+            <ErrorText> {errors.firstName?.message}</ErrorText>
           </Grid>
           <Grid item sx={{ width: '50%' }}>
             <Input
@@ -77,6 +74,7 @@ const SignUpForm = () => {
               register={register}
               autoComplete="family-name"
             />
+            <ErrorText> {errors.lastName?.message}</ErrorText>
           </Grid>
         </Grid>
         <Input
@@ -85,12 +83,15 @@ const SignUpForm = () => {
           register={register}
           autoComplete="email"
         />
+        <ErrorText> {errors.email?.message}</ErrorText>
         <Input
           name="password"
           label="Password"
+          type="password"
           register={register}
           autoComplete="current-password"
         />
+        <ErrorText> {errors.password?.message}</ErrorText>
         <Button
           type="submit"
           fullWidth

@@ -1,4 +1,3 @@
-import Form from 'components/Form';
 import ContactsList from 'components/ContactsList';
 import Filter from 'components/Filter';
 import toast from 'react-hot-toast';
@@ -11,6 +10,8 @@ import {
 import { selectFilter } from 'Redux/filter/selectors';
 import { DefToaster } from 'components/Toaster';
 import { Box } from '@mui/material';
+import ContactsForm from 'components/ContactsForm';
+import isAlreadyInContact from 'isAlreadyInContact';
 
 export default function Contacts() {
   const {
@@ -23,22 +24,10 @@ export default function Contacts() {
   const [addContact] = useAddContactsMutation();
   const [deleteContact] = useDeleteContactMutation();
 
-  // console.log('isLoading', isLoading);
-  // console.log('error', error);
-  // console.log('contacts', contacts);
-
   const filter = useSelector(selectFilter);
-  console.log('filter', filter);
 
   const handleFormSubmit = async contactInfo => {
-    const isDuplicated = contacts.some(
-      oldContact => oldContact.name.trim() === contactInfo.name.trim()
-    );
-
-    if (isDuplicated) {
-      alert(`${contactInfo.name} is already in contacts`);
-      return;
-    }
+    if (isAlreadyInContact(contacts, contactInfo)) return;
 
     try {
       toast.success('Successfully created!');
@@ -73,11 +62,13 @@ export default function Contacts() {
   return (
     <Box
       sx={{
-        maxWidth: 350,
+        maxWidth: 500,
+        ml: 'auto',
+        mr: 'auto',
       }}
     >
       <h1>Add Contact</h1>
-      <Form onFormSubmit={handleFormSubmit}></Form>
+      <ContactsForm onFormSubmit={handleFormSubmit} buttonText="Add Contact" />
       <h2>Contacts</h2>
       <Filter />
       {isLoading && !error && (

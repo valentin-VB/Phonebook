@@ -7,7 +7,13 @@ export const Layout = () => {
   return (
     <>
       <AppBar />
-      <Container maxWidth="xl" component="main">
+      <Container
+        maxWidth="xl"
+        component="main"
+        sx={{
+          paddingLeft: '30px',
+        }}
+      >
         <Suspense fallback={null}>
           <Outlet />
         </Suspense>

@@ -1,19 +1,14 @@
 import React from 'react';
-import { ErrorText } from 'components/Form/Form.styled';
-import * as yup from 'yup';
+import { ErrorText } from 'components/ContactsForm/ContactsForm.styled';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import Input from 'components/Input';
 import { Button, InputAdornment } from '@mui/material';
 import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
+import { addContactSchema } from 'validationShemes';
 
-let schema = yup.object().shape({
-  name: yup.string().required('Name field is required').min(2, 'Too Short!'),
-  number: yup.number().integer().typeError('Phone field is required'),
-});
-
-const ContactForm = ({ onFormSubmit }) => {
+const ContactForm = ({ onFormSubmit, buttonText, placeholder }) => {
   const {
     register,
     handleSubmit,
@@ -21,7 +16,7 @@ const ContactForm = ({ onFormSubmit }) => {
     formState: { errors },
   } = useForm({
     defaultValues: { name: '', number: '' },
-    resolver: yupResolver(schema),
+    resolver: yupResolver(addContactSchema),
   });
 
   const handleFormSubmit = data => {
@@ -63,7 +58,7 @@ const ContactForm = ({ onFormSubmit }) => {
       />
       <ErrorText> {errors.number?.message}</ErrorText>
       <Button type="submit" variant="contained">
-        Add Contact
+        {buttonText}
       </Button>
     </form>
   );
