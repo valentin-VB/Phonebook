@@ -25,7 +25,7 @@ export const UserMenu = () => {
   return (
     <Toolbar
       sx={{
-        gap: '15px',
+        padding: 0,
       }}
     >
       {notMobile && <div>Welcome, {firstName}</div>}

@@ -19,7 +19,11 @@ const AppBar = () => {
         alignItems: 'center',
       }}
     >
-      <Toolbar>
+      <Toolbar
+        sx={{
+          pr: 0,
+        }}
+      >
         <Link to="/">
           <PermContactCalendarIcon fontSize="large" color="secondary" />
         </Link>
