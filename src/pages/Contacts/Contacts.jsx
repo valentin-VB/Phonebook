@@ -39,9 +39,7 @@ export default function Contacts() {
   };
 
   const visiableContacts = () => {
-    if (!contacts) {
-      return;
-    }
+    if (!contacts) return;
 
     return contacts.filter(contact =>
       contact.name.toLowerCase().includes(filter.toLowerCase())
