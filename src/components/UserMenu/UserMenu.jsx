@@ -35,6 +35,11 @@ export const UserMenu = () => {
         type="button"
         startIcon={<LogoutIcon />}
         onClick={() => handleClick()}
+        sx={{
+          ml: '10px',
+          pl: { mobile: '9px' },
+          pr: { mobile: '9px' },
+        }}
       >
         Log Out
       </Button>

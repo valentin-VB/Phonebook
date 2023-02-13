@@ -5,7 +5,6 @@ import { selectToken } from 'Redux/auth/selectors';
 
 const Navigation = () => {
   const token = useSelector(selectToken);
-  console.log('token', token);
   return (
     <nav>
       <Toolbar sx={{ gap: '25px' }}>

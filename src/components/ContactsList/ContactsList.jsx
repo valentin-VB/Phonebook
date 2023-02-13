@@ -1,9 +1,10 @@
+import { List } from '@mui/material';
 import ListItem from 'components/ListItem';
 
 function ContactsList({ contacts, onBtnClick }) {
   return (
     contacts.length > 0 && (
-      <ul>
+      <List sx={{ mb: '20px' }}>
         {contacts.map(contact => {
           return (
             <ListItem
@@ -13,7 +14,7 @@ function ContactsList({ contacts, onBtnClick }) {
             ></ListItem>
           );
         })}
-      </ul>
+      </List>
     )
   );
 }

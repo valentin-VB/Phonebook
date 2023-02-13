@@ -8,14 +8,14 @@ import PhoneIcon from '@mui/icons-material/Phone';
 import PersonIcon from '@mui/icons-material/Person';
 import { addContactSchema } from 'validationShemes';
 
-const ContactForm = ({ onFormSubmit, buttonText, placeholder }) => {
+const ContactForm = ({ onFormSubmit, buttonText, initialValues }) => {
   const {
     register,
     handleSubmit,
     reset,
     formState: { errors },
   } = useForm({
-    defaultValues: { name: '', number: '' },
+    defaultValues: { name: initialValues?.name, number: initialValues?.number },
     resolver: yupResolver(addContactSchema),
   });
 

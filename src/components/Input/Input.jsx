@@ -10,7 +10,6 @@ function Input({
   pattern,
   title,
   startadornment,
-  placeholder = '',
 }) {
   return (
     <TextField
@@ -24,7 +23,6 @@ function Input({
       autoFocus={autoFocus}
       pattern={pattern}
       title={title}
-      placeholder={placeholder}
       InputProps={{
         startAdornment: startadornment,
       }}
